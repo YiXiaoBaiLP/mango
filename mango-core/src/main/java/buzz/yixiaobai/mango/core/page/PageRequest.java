@@ -27,4 +27,8 @@ public class PageRequest {
      * 查询参数
      */
     private Map<String, Object> params = new HashMap<>();
+
+    public Object getParam(String key){
+        return params.get(key);
+    }
 }

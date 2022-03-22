@@ -1,0 +1,8 @@
+# MyBatis分页助手配置
+# pageHelper
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  # 支持方法参数
+  support-methods-arguments: true
+  params: conunt=countSql

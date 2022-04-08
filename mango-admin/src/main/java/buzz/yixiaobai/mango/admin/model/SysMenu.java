@@ -1,6 +1,8 @@
 package buzz.yixiaobai.mango.admin.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -60,4 +62,9 @@ public class SysMenu {
     @ApiModelProperty("是否删除 -1：已删除	0：正常")
     private Integer delFlag;
 
+    private String parentName;
+
+    private Integer level;
+
+    private List<SysMenu> children;
 }

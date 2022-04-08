@@ -2,6 +2,9 @@ package buzz.yixiaobai.mango.admin.dao;
 
 
 import buzz.yixiaobai.mango.admin.model.SysConfig;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,5 +27,11 @@ public interface SysConfigMapper {
     int updateByPrimaryKeySelective(SysConfig sysConfig);
 
     int updateByPrimaryKey(SysConfig sysConfig);
+
+    List<SysConfig> findPage();
+
+    List<SysConfig> finaPageLabel(@Param("label") String label);
+
+    List<SysConfig> findByLabel(@Param("label") String label);
 
 }

@@ -2,6 +2,9 @@ package buzz.yixiaobai.mango.admin.dao;
 
 
 import buzz.yixiaobai.mango.admin.model.SysRole;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,5 +27,21 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole sysRole);
 
     int updateByPrimaryKey(SysRole sysRole);
+
+    /**
+     * 分页查询
+     * @return
+     */
+    List<SysRole> findPage();
+
+    /**
+     * 查询所有
+     * @return
+     */
+    List<SysRole> findAll();
+
+    List<SysRole> findPageByName(@Param("name") String name);
+
+    List<SysRole> findByName(@Param("name") String name);
 
 }

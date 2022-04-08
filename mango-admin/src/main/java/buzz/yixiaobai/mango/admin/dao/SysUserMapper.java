@@ -2,6 +2,7 @@ package buzz.yixiaobai.mango.admin.dao;
 
 
 import buzz.yixiaobai.mango.admin.model.SysUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,15 +29,15 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     /**
-     * 查询全部
-     * @return
-     */
-    List<SysUser> findAll();
-
-    /**
      * 分页查询
      * @return
      */
     List<SysUser> findPage();
+
+    SysUser findByName(@Param("name") String name);
+
+    List<SysUser> findPageByName(@Param("name") String name);
+
+    List<SysUser> findPageByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
 }

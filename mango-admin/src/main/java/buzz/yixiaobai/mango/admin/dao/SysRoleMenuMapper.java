@@ -2,6 +2,7 @@ package buzz.yixiaobai.mango.admin.dao;
 
 
 import buzz.yixiaobai.mango.admin.model.SysRoleMenu;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -24,4 +25,6 @@ public interface SysRoleMenuMapper {
     int updateByPrimaryKeySelective(SysRoleMenu sysRoleMenu);
 
     int updateByPrimaryKey(SysRoleMenu sysRoleMenu);
+
+    int deleteByRoleId(@Param("roleId") Long roleId);
 }

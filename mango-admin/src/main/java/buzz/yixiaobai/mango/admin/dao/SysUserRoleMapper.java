@@ -2,6 +2,9 @@ package buzz.yixiaobai.mango.admin.dao;
 
 
 import buzz.yixiaobai.mango.admin.model.SysUserRole;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,5 +27,9 @@ public interface SysUserRoleMapper {
     int updateByPrimaryKeySelective(SysUserRole sysUserRole);
 
     int updateByPrimaryKey(SysUserRole sysUserRole);
+
+    List<SysUserRole> findUserRoles(@Param("userId") Long userId);
+
+    int deleteByUserId(@Param("userId") Long userId);
 
 }

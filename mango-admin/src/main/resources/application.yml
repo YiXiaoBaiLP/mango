@@ -37,9 +37,9 @@ logging:
 # MyBatis分页助手配置
 # 需要导入自己的mango-core jar包
 # pageHelper
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  # 支持方法参数
-  support-methods-arguments: true
-params: count=countSql
+#pagehelper:
+#  helper-dialect: mysql
+#  reasonable: true
+#  # 支持方法参数
+#  support-methods-arguments: true
+#  params: count=countSql

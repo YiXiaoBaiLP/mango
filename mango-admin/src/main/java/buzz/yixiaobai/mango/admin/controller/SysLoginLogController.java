@@ -1,7 +1,16 @@
 package buzz.yixiaobai.mango.admin.controller;
 
+import buzz.yixiaobai.mango.admin.model.SysLoginLog;
+import buzz.yixiaobai.mango.admin.server.ISysLoginLogService;
+import buzz.yixiaobai.mango.core.http.HttpResult;
+import buzz.yixiaobai.mango.core.page.PageRequest;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -11,8 +20,20 @@ import org.springframework.stereotype.Controller;
  * @author yixiaobai
  * @since 2022-03-18
  */
-@Controller
-@RequestMapping("/mango/sysLoginLog")
+@RestController
+@RequestMapping("loginLog")
 public class SysLoginLogController {
 
+    @Resource
+    private ISysLoginLogService sysLoginLogService;
+
+    @PostMapping("/findPage")
+    public HttpResult findPage(@RequestBody PageRequest pageRequest){
+        return HttpResult.ok(sysLoginLogService.findPage(pageRequest));
+    }
+
+    @PostMapping("/delete")
+    public HttpResult delete(List<SysLoginLog> records){
+        return HttpResult.ok(sysLoginLogService.delete(records));
+    }
 }

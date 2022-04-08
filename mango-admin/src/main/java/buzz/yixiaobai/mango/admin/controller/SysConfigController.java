@@ -1,7 +1,17 @@
 package buzz.yixiaobai.mango.admin.controller;
 
+import buzz.yixiaobai.mango.admin.model.SysConfig;
+import buzz.yixiaobai.mango.admin.server.ISysConfigService;
+import buzz.yixiaobai.mango.core.http.HttpResult;
+import buzz.yixiaobai.mango.core.page.PageRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -11,8 +21,45 @@ import org.springframework.stereotype.Controller;
  * @author yixiaobai
  * @since 2022-03-18
  */
-@Controller
-@RequestMapping("/mango/sysConfig")
+@RestController
+@RequestMapping("config")
 public class SysConfigController {
 
+    @Resource
+    private ISysConfigService sysConfigServer;
+
+    @PostMapping("/save")
+    public HttpResult save(@RequestBody SysConfig record){
+        return HttpResult.ok(sysConfigServer.save(record));
+    }
+
+    /**
+     * 删除
+     * @param records
+     * @return
+     */
+    @PostMapping("/delete")
+    public HttpResult delete(@RequestBody List<SysConfig> records){
+        return HttpResult.ok(sysConfigServer.delete(records));
+    }
+
+    /**
+     * 分页查询
+     * @param pageRequest
+     * @return
+     */
+    @PostMapping("/findPage")
+    public HttpResult findPage(@RequestBody PageRequest pageRequest){
+        return HttpResult.ok(sysConfigServer.findPage(pageRequest));
+    }
+
+    /**
+     * 通过label分页查询
+     * @param label
+     * @return
+     */
+    @PostMapping("/findByLabel")
+    public HttpResult findByLabel(@RequestBody String label){
+        return HttpResult.ok(sysConfigServer.findByLabel(label));
+    }
 }

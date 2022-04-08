@@ -1,6 +1,9 @@
 package buzz.yixiaobai.mango.admin.dao;
 
 import buzz.yixiaobai.mango.admin.model.SysDept;
+import buzz.yixiaobai.mango.core.page.PageRequest;
+
+import java.util.List;
 
 /**
  * <p>
@@ -23,4 +26,8 @@ public interface SysDeptMapper {
     int updateByPrimaryKeySelective(SysDept sysDept);
 
     int updateByPrimaryKey(SysDept sysDept);
+
+    List<SysDept> findPage();
+
+    List<SysDept> findAll();
 }

@@ -1,7 +1,7 @@
 package buzz.yixiaobai.mango.admin.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
  * @author yixiaobai
  * @since 2022-03-18
  */
-@Controller
-@RequestMapping("/mango/sysRoleMenu")
+@RestController
+@RequestMapping("roleMenu")
 public class SysRoleMenuController {
 
 }

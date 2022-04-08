@@ -2,6 +2,9 @@ package buzz.yixiaobai.mango.admin.dao;
 
 
 import buzz.yixiaobai.mango.admin.model.SysLog;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,4 +27,17 @@ public interface SysLogMapper {
     int updateByPrimaryKeySelective(SysLog sysLog);
 
     int updateByPrimaryKey(SysLog sysLog);
+
+    /**
+     * 分页查询
+     * @return
+     */
+    List<SysLog> findPage();
+
+    /**
+     * 通过userName分页查询
+     * @param userName
+     * @return
+     */
+    List<SysLog> findPageByUserName(@Param("userName") String userName);
 }

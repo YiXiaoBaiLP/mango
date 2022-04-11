@@ -1,5 +1,6 @@
 package buzz.yixiaobai.mango.admin.controller;
 
+import buzz.yixiaobai.common.utils.FileUtils;
 import buzz.yixiaobai.mango.admin.constant.SysConstants;
 import buzz.yixiaobai.mango.admin.model.SysUser;
 import buzz.yixiaobai.mango.admin.server.ISysUserService;
@@ -9,6 +10,8 @@ import buzz.yixiaobai.mango.core.page.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 /**
  * <p>
@@ -96,5 +99,11 @@ public class SysUserController {
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
         return HttpResult.ok(sysUserService.findPage(pageRequest));
+    }
+
+    @PostMapping("/exportExcelUser")
+    public void exportExcelUser(@RequestBody PageRequest pageRequest, HttpServletResponse res) {
+        File file = sysUserService.createUserExcelFile(pageRequest);
+        FileUtils.download(res, file, file.getName());
     }
 }

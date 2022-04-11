@@ -11,6 +11,12 @@ import java.io.*;
  */
 public class PoiUtils {
 
+    /**
+     * 生成Excel文件
+     * @param workbook
+     * @param fileName
+     * @return
+     */
     public static File crateExcelFile(Workbook workbook, String fileName){
         OutputStream stream = null;
         File file = null;

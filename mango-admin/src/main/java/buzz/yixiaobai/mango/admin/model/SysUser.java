@@ -2,6 +2,7 @@ package buzz.yixiaobai.mango.admin.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.swagger.annotations.ApiModel;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 /**
  * <p>
@@ -58,13 +60,13 @@ public class SysUser  {
     private String createBy;
 
     @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @ApiModelProperty("更新人")
     private String lastUpdateBy;
 
     @ApiModelProperty("更新时间")
-    private LocalDateTime lastUpdateTime;
+    private Date lastUpdateTime;
 
     @ApiModelProperty("是否删除 -1：已删除	0：正常")
     private Integer delFlag;

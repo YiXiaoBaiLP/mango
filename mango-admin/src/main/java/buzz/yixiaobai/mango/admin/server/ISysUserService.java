@@ -43,7 +43,7 @@ public interface ISysUserService extends CurdService<SysUser> {
 
     /**
      * 生成用户信息Excel文件
-     * @param pageRequest
+     * @param pageRequest 要导出的分页查询参数
      * @return
      */
     File createUserExcelFile(PageRequest pageRequest);

@@ -1,5 +1,7 @@
 package buzz.yixiaobai.mango.admin.server.impl;
 
+import buzz.yixiaobai.common.utils.DateTimeUtils;
+import buzz.yixiaobai.common.utils.PoiUtils;
 import buzz.yixiaobai.mango.admin.dao.SysRoleMapper;
 import buzz.yixiaobai.mango.admin.dao.SysUserMapper;
 import buzz.yixiaobai.mango.admin.dao.SysUserRoleMapper;
@@ -12,14 +14,15 @@ import buzz.yixiaobai.mango.admin.server.ISysUserService;
 import buzz.yixiaobai.mango.core.page.MyBatisPageHelper;
 import buzz.yixiaobai.mango.core.page.PageRequest;
 import buzz.yixiaobai.mango.core.page.PageResult;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>
@@ -207,6 +210,63 @@ public class SysUserServiceImpl implements ISysUserService{
      */
     @Override
     public File createUserExcelFile(PageRequest pageRequest) {
-        return null;
+        PageResult pageResult = findPage(pageRequest);
+        return createUserExcelFile(pageResult.getContent());
+    }
+
+    /**
+     * 生成Excel文件
+     * @param records
+     * @return
+     */
+    public static File createUserExcelFile(List<?> records){
+        if(records == null){
+            records = new ArrayList<>();
+        }
+        // 创建Excel文件
+        Workbook workBoook = new XSSFWorkbook();
+        // 创建sheet
+        Sheet sheet = workBoook.createSheet();
+        // 创建行
+        Row row0 = sheet.createRow(0);
+        int columnIndex = 0;
+        row0.createCell(columnIndex).setCellValue("No");
+        row0.createCell(++columnIndex).setCellValue("ID");
+        row0.createCell(++columnIndex).setCellValue("用户名");
+        row0.createCell(++columnIndex).setCellValue("昵称");
+        row0.createCell(++columnIndex).setCellValue("机构");
+        row0.createCell(++columnIndex).setCellValue("角色");
+        row0.createCell(++columnIndex).setCellValue("邮箱");
+        row0.createCell(++columnIndex).setCellValue("手机号");
+        row0.createCell(++columnIndex).setCellValue("状态");
+        row0.createCell(++columnIndex).setCellValue("头像");
+        row0.createCell(++columnIndex).setCellValue("创建人");
+        row0.createCell(++columnIndex).setCellValue("创建时间");
+        row0.createCell(++columnIndex).setCellValue("最后更新人");
+        row0.createCell(++columnIndex).setCellValue("最后更新时间");
+        for(int i = 0; i < records.size(); i++){
+            SysUser sysUser = (SysUser) records.get(i);
+            Row row = sheet.createRow(i + 1);
+            // 创建单元格
+            for(int j = 0; j < columnIndex + 1; j++){
+                row.createCell(j);
+            }
+            columnIndex = 0;
+            row.getCell(columnIndex).setCellValue(i + 1);
+            row.getCell(++columnIndex).setCellValue(sysUser.getId());
+            row.getCell(++columnIndex).setCellValue(sysUser.getName());
+            row.getCell(++columnIndex).setCellValue(sysUser.getNickName());
+            row.getCell(++columnIndex).setCellValue(sysUser.getDeptName());
+            row.getCell(++columnIndex).setCellValue(sysUser.getRoleName());
+            row.getCell(++columnIndex).setCellValue(sysUser.getEmail());
+            row.getCell(++columnIndex).setCellValue(sysUser.getMobile());
+            row.getCell(++columnIndex).setCellValue(sysUser.getStatus());
+            row.getCell(++columnIndex).setCellValue(sysUser.getAvatar());
+            row.getCell(++columnIndex).setCellValue(sysUser.getCreateBy());
+            row.getCell(++columnIndex).setCellValue(DateTimeUtils.getDateTime(sysUser.getCreateTime()));
+            row.getCell(++columnIndex).setCellValue(sysUser.getLastUpdateBy());
+            row.getCell(++columnIndex).setCellValue(DateTimeUtils.getDateTime(sysUser.getLastUpdateTime()));
+        }
+        return PoiUtils.crateExcelFile(workBoook, "download_user");
     }
 }

@@ -99,10 +99,10 @@ public class PasswordEncoder {
 
     public static void main(String[] args) {
         String salt = "helloworld";
-        PasswordEncoder encoderMD5 = new PasswordEncoder(salt, PasswordEncoder.MD5);
-        String encodeMD5 = encoderMD5.encode("test");
+        PasswordEncoder encoderMD5 = new PasswordEncoder(salt);
+        String encodeMD5 = encoderMD5.encode("1qazXSW@");
         System.out.println(encodeMD5);
-        boolean passwordValid = encoderMD5.matches("083a8db3ff5b9b4ece3ef2bde03226c8", "test");
+        boolean passwordValid = encoderMD5.matches("88463c84ddd8100f11f7d687ca4cc929", "1qazXSW@");
         System.out.println("MD5加密前与加密后一致吗？：" + passwordValid);
         System.out.println("---------------------------------------------------------------------------------");
         PasswordEncoder encoderSHA = new PasswordEncoder(salt, PasswordEncoder.SHA);

@@ -7,6 +7,7 @@ import buzz.yixiaobai.mango.admin.server.ISysUserService;
 import buzz.yixiaobai.mango.admin.util.PasswordUtils;
 import buzz.yixiaobai.mango.core.http.HttpResult;
 import buzz.yixiaobai.mango.core.page.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,6 +34,7 @@ public class SysUserController {
      * @param record
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:user:edit') AND hasAuthority('sys:user:add')")
     @PostMapping("/save")
     public HttpResult save(@RequestBody SysUser record) {
         SysUser user = sysUserService.findById(record.getId());
@@ -68,6 +70,7 @@ public class SysUserController {
      * @param name
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("/findByName")
     public HttpResult findByName(@RequestParam String name){
         return HttpResult.ok(sysUserService.findByName(name));
@@ -78,6 +81,7 @@ public class SysUserController {
      * @param name
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("/findPermissions")
     public HttpResult findPermissions(@RequestParam String name){
         return HttpResult.ok(sysUserService.findPermissions(name));
@@ -88,6 +92,7 @@ public class SysUserController {
      * @param userId
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("findUserRoles")
     public HttpResult findUserRoles(@RequestParam Long userId){
         return HttpResult.ok(sysUserService.findUserRoles(userId));
@@ -96,11 +101,13 @@ public class SysUserController {
      * 分页查询
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
         return HttpResult.ok(sysUserService.findPage(pageRequest));
     }
 
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @PostMapping("/exportExcelUser")
     public void exportExcelUser(@RequestBody PageRequest pageRequest, HttpServletResponse res) {
         File file = sysUserService.createUserExcelFile(pageRequest);

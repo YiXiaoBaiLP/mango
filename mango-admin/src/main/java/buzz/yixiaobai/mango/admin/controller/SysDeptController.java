@@ -3,6 +3,7 @@ package buzz.yixiaobai.mango.admin.controller;
 import buzz.yixiaobai.mango.admin.model.SysDept;
 import buzz.yixiaobai.mango.admin.server.ISysDeptService;
 import buzz.yixiaobai.mango.core.http.HttpResult;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ public class SysDeptController {
      * @param record
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dept:edit') AND hasAuthority('sys:dept:add')")
     @PostMapping("/save")
     public HttpResult save(@RequestBody SysDept record){
         return HttpResult.ok(sysDeptService.save(record));
@@ -41,6 +43,7 @@ public class SysDeptController {
      * @param records
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dept:delete')")
     @PostMapping("/delete")
     public HttpResult delete(@RequestBody List<SysDept> records){
         return HttpResult.ok(sysDeptService.delete(records));
@@ -50,6 +53,7 @@ public class SysDeptController {
      * 部门树
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dept:view')")
     @PostMapping("/findTree")
     public HttpResult findTree(){
         return HttpResult.ok(sysDeptService.findTree());

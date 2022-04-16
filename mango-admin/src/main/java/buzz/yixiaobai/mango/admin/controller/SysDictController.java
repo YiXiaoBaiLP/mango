@@ -4,6 +4,7 @@ import buzz.yixiaobai.mango.admin.model.SysDict;
 import buzz.yixiaobai.mango.admin.server.ISysDictService;
 import buzz.yixiaobai.mango.core.http.HttpResult;
 import buzz.yixiaobai.mango.core.page.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class SysDictController {
      * @param sysDict
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dict:edit') AND hasAuthority('sys:dict:add')")
     @PostMapping("/save")
     public HttpResult save(@RequestBody SysDict sysDict){
         return HttpResult.ok(sysDictService.save(sysDict));
@@ -42,6 +44,7 @@ public class SysDictController {
      * @param sysDict
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dict:delete')")
     @PostMapping("/delete")
     public HttpResult delete(@RequestBody SysDict sysDict){
         return HttpResult.ok(sysDictService.delete(sysDict));
@@ -51,6 +54,7 @@ public class SysDictController {
      * 分页查询
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dict:view')")
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
         return HttpResult.ok(sysDictService.findPage(pageRequest));
@@ -61,6 +65,7 @@ public class SysDictController {
      * @param label
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:dict:view')")
     @PostMapping("/findByLabel")
     public HttpResult findByLabel(@RequestBody String label){
         return HttpResult.ok(sysDictService.findByLabel(label));

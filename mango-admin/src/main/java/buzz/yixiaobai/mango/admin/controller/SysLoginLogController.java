@@ -4,6 +4,7 @@ import buzz.yixiaobai.mango.admin.model.SysLoginLog;
 import buzz.yixiaobai.mango.admin.server.ISysLoginLogService;
 import buzz.yixiaobai.mango.core.http.HttpResult;
 import buzz.yixiaobai.mango.core.page.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +28,13 @@ public class SysLoginLogController {
     @Resource
     private ISysLoginLogService sysLoginLogService;
 
+    @PreAuthorize("hasAuthority('sys:lgoinlog:view')")
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
         return HttpResult.ok(sysLoginLogService.findPage(pageRequest));
     }
 
+    @PreAuthorize("hasAuthority('sys:lgoinlog:delete')")
     @PostMapping("/delete")
     public HttpResult delete(List<SysLoginLog> records){
         return HttpResult.ok(sysLoginLogService.delete(records));

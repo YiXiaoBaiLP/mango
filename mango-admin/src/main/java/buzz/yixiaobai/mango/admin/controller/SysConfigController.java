@@ -5,6 +5,7 @@ import buzz.yixiaobai.mango.admin.server.ISysConfigService;
 import buzz.yixiaobai.mango.core.http.HttpResult;
 import buzz.yixiaobai.mango.core.page.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class SysConfigController {
     @Resource
     private ISysConfigService sysConfigServer;
 
+    @PreAuthorize("hasAuthority('sys:config:add') AND hasAuthority('sys:config:edit')")
     @PostMapping("/save")
     public HttpResult save(@RequestBody SysConfig record){
         return HttpResult.ok(sysConfigServer.save(record));
@@ -38,6 +40,7 @@ public class SysConfigController {
      * @param records
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:config:delete')")
     @PostMapping("/delete")
     public HttpResult delete(@RequestBody List<SysConfig> records){
         return HttpResult.ok(sysConfigServer.delete(records));
@@ -48,6 +51,7 @@ public class SysConfigController {
      * @param pageRequest
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:config:view')")
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest){
         return HttpResult.ok(sysConfigServer.findPage(pageRequest));
@@ -58,6 +62,7 @@ public class SysConfigController {
      * @param label
      * @return
      */
+    @PreAuthorize("hasAuthority('sys:config:view')")
     @PostMapping("/findByLabel")
     public HttpResult findByLabel(@RequestBody String label){
         return HttpResult.ok(sysConfigServer.findByLabel(label));

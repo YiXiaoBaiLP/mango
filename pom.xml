@@ -13,6 +13,7 @@
         <module>mango-common</module>
         <module>mango-core</module>
         <module>mango-backup</module>
+        <module>mango-monitor</module>
     </modules>
 
     <packaging>pom</packaging>

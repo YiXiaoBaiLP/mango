@@ -1,0 +1,6 @@
+# 端口号修改
+server:
+  port: 8000
+spring:
+  application:
+    name: mango-monitor

@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 public class SysDictController {
 
     @Resource // 注入Service
-    public ISysDictService sysDictService;
+    private ISysDictService sysDictService;
 
     /**
      * 通过画面插入数据

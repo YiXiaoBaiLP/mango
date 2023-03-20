@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * Durid数据源配置类
+ * Druid数据源配置类
  * @author yixiaobai
  * @create 2022/03/20 下午4:50
  */

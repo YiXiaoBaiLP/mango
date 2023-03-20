@@ -65,7 +65,7 @@ public class PasswordEncoder {
         if(salt == null || "".equals(salt)){
             return password;
         } else {
-            return password + "{" + salt.toString() + "}";
+            return password + "{" + salt + "}";
         }
     }
 
@@ -76,8 +76,8 @@ public class PasswordEncoder {
      */
     private String byteArrayToHexString(byte[] b) {
         StringBuffer resultsb = new StringBuffer();
-        for(int i = 0; i < b.length; i++){
-            resultsb.append(byteToHexString(b[i]));
+        for (byte value : b) {
+            resultsb.append(byteToHexString(value));
         }
         return resultsb.toString();
     }
